@@ -1,0 +1,22 @@
+%h1 Listing teas
+
+%table
+  %tr
+    %th Name
+    %th Factory
+    %th Category
+    %th
+    %th
+    %th
+
+  - @teas.each do |tea|
+    %tr
+      %td= tea.name
+      %td= tea.factory
+      %td= tea.category
+      %td= link_to 'Show', tea
+      %td= link_to 'Edit', edit_tea_path(tea)
+      %td= link_to 'Destroy', tea, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%div
+  = link_to 'New Tea', new_tea_path

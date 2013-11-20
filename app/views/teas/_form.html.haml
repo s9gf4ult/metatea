@@ -1,0 +1,15 @@
+= simple_form_for @tea do |f|
+  - if @tea.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@tea.errors.count, "error")} prohibited this tea from being saved:"
+      %ul
+        - @tea.errors.full_messages.each do |msg|
+          %li= msg
+  .fields
+    = f.input :name
+    = f.input :factory
+    = select_tag(@tea.class.name.underscore) do
+      %div
+
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @tea.name
+%p
+  %b Factory:
+  = @tea.factory
+%p
+  %b Category:
+  = @tea.category
+
+= link_to 'Edit', edit_tea_path(@tea)
+\|
+= link_to 'Back', teas_path
