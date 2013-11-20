@@ -1,6 +1,7 @@
 :tea:
   :categories:
+    :other: other
     :puerh:
-      :raw:
-      :ripe:
-    :teguanin:
+      :raw: raw_puerh
+      :ripe: ripe_puerh
+    :teguanin: teguanin
