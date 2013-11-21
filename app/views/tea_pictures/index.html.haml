@@ -1,0 +1,19 @@
+%h1 Listing tea_pictures
+
+%table
+  %tr
+    %th Tea
+    %th
+    %th
+    %th
+
+  - @tea_pictures.each do |tea_picture|
+    %tr
+      %td= tea_picture.tea_id
+      %td= link_to 'Show', tea_picture
+      %td= link_to 'Edit', edit_tea_picture_path(tea_picture)
+      %td= link_to 'Destroy', tea_picture, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Tea picture', new_tea_picture_path

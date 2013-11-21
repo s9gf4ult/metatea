@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Tea:
+  = @tea_picture.tea_id
+
+= link_to 'Edit', edit_tea_picture_path(@tea_picture)
+\|
+= link_to 'Back', tea_pictures_path
