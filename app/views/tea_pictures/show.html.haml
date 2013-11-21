@@ -2,7 +2,9 @@
 
 %p
   %b Tea:
-  = @tea_picture.tea_id
+  = link_to @tea_picture.tea.name, @tea_picture.tea if @tea_picture.tea
+  .tea_picture
+    = image_tag @tea_picture.picture.url
 
 = link_to 'Edit', edit_tea_picture_path(@tea_picture)
 \|
