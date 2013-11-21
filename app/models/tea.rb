@@ -3,4 +3,6 @@ class Tea < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :category, :presence => true
+
+  has_many :tea_pictures
 end

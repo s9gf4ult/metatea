@@ -10,6 +10,14 @@
   %b Category:
   = @tea.category
 
+.tea_pictures
+  - @tea.tea_pictures.each do |pic|
+    .tea_picture
+      = image_tag pic.picture.url(:medium)
+
+= link_to "Attach picture", new_tea_picture_path("tea[id]" => @tea.id)
+
+
 = link_to 'Edit', edit_tea_path(@tea)
 \|
 = link_to 'Back', teas_path

@@ -2,7 +2,11 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :tea_id
+    - if @tea
+      = f.input :tea_id, :as => :hidden, :input_html => {:value => @tea.id}
+    - else
+      = f.association :tea
+    = f.input :picture
 
   .form-actions
     = f.button :submit

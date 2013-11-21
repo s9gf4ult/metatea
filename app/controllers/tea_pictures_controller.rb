@@ -25,7 +25,7 @@ class TeaPicturesController < ApplicationController
   # GET /tea_pictures/new.json
   def new
     @tea_picture = TeaPicture.new
-
+    @tea = Tea.find params[:tea][:id] if params[:tea]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @tea_picture }
@@ -40,11 +40,13 @@ class TeaPicturesController < ApplicationController
   # POST /tea_pictures
   # POST /tea_pictures.json
   def create
+    @tea = Tea.find params[:tea_picture][:tea_id]
     @tea_picture = TeaPicture.new(params[:tea_picture])
+    @tea_picture.tea = @tea
 
     respond_to do |format|
       if @tea_picture.save
-        format.html { redirect_to @tea_picture, notice: 'Tea picture was successfully created.' }
+        format.html { redirect_to @tea_picture.tea, notice: 'Tea picture was successfully created.' }
         format.json { render json: @tea_picture, status: :created, location: @tea_picture }
       else
         format.html { render action: "new" }

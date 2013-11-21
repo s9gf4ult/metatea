@@ -3,6 +3,7 @@
 %table
   %tr
     %th Name
+    %th Picture
     %th Factory
     %th Category
     %th
@@ -12,6 +13,7 @@
   - @teas.each do |tea|
     %tr
       %td= tea.name
+      %td= image_tag(tea.tea_pictures.first.picture.url(:small))
       %td= tea.factory
       %td= tea.category
       %td= link_to 'Show', tea
