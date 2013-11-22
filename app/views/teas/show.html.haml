@@ -16,6 +16,10 @@
       = link_to pic do
         = image_tag pic.picture.url(:medium)
 
+.tea_links
+  - @tea.tea_links.each do |link|
+    = link_to link.link, link.link
+
 = link_to "Attach picture", new_tea_picture_path("tea[id]" => @tea.id)
 
 

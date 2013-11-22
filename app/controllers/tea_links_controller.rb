@@ -25,6 +25,7 @@ class TeaLinksController < ApplicationController
   # GET /tea_links/new.json
   def new
     @tea_link = TeaLink.new
+    @tea = Tea.find params[:tea][:id] if params[:tea]
 
     respond_to do |format|
       format.html # new.html.erb

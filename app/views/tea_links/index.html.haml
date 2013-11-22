@@ -10,7 +10,7 @@
 
   - @tea_links.each do |tea_link|
     %tr
-      %td= tea_link.tea_id
+      %td= link_to tea_link.tea.name, tea_link.tea
       %td= tea_link.link
       %td= link_to 'Show', tea_link
       %td= link_to 'Edit', edit_tea_link_path(tea_link)

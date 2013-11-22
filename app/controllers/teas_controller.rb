@@ -2,8 +2,11 @@ class TeasController < ApplicationController
   # GET /teas
   # GET /teas.json
   def index
-    @teas = Tea.all
-
+    if params[:tea] && params[:tea][:category]
+      @teas = Tea.where(:category => params[:tea][:category])
+    else
+      @teas = Tea.all
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @teas }

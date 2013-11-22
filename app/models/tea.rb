@@ -5,4 +5,5 @@ class Tea < ActiveRecord::Base
   validates :category, :presence => true
 
   has_many :tea_pictures
+  has_many :tea_links
 end

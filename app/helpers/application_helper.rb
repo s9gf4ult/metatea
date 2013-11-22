@@ -14,8 +14,24 @@ module ApplicationHelper
         end
       end
     end.reduce(:concat)
-
   end
 
+  def hash_links_tree(h, lmargin)
+    h.collect do |k, v|
+      if v.is_a? Hash
+        r = t(k)
+        r << content_tag(:div, :style => "margin-left: #{lmargin}") do
+          hash_links_tree v, lmargin
+        end
+        r
+      else
+        content_tag :div do
+          link_to teas_path("tea[category]" => v) do
+            t k
+          end
+        end
+      end
+    end.reduce(:concat)
+  end
 
 end
