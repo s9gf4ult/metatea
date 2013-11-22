@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Tea:
+  = @tea_link.tea_id
+%p
+  %b Link:
+  = @tea_link.link
+
+= link_to 'Edit', edit_tea_link_path(@tea_link)
+\|
+= link_to 'Back', tea_links_path

@@ -1,4 +1,7 @@
 Metatea::Application.routes.draw do
+  resources :tea_links
+
+
   resources :tea_pictures
 
 
