@@ -1,4 +1,9 @@
 Metatea::Application.routes.draw do
+
+  root :to => "teas#index"
+
+  devise_for :users
+
   resources :tea_links
 
 
