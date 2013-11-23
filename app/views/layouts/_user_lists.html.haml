@@ -1,1 +1,2 @@
-
+- SETTINGS[:user][:lists].each do |list|
+  %div= link_to list, send("#{list}_tea_list_assignments_path")

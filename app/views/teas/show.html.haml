@@ -2,6 +2,15 @@
 
 %p Added by: #{@tea.user.email}
 
+- if user_signed_in?
+  %p
+    - SETTINGS[:user][:lists].each do |list_name|
+      - assignment = current_user.named_tea_assignment(list_name, @tea)
+      - if assignment
+        = link_to "remove from #{list_name}", assignment, :method => :delete
+      - else
+        = link_to "add to list #{list_name}", tea_list_assignments_path("tea_list_assignment[list_name]" => list_name, "tea_list_assignment[tea_id]" => @tea.id), :method => :post
+
 %p
   %b Name:
   = @tea.name

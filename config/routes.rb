@@ -1,9 +1,15 @@
 Metatea::Application.routes.draw do
 
-  resources :tea_list_assignments
-
 
   root :to => "teas#index"
+
+  resources :tea_list_assignments, :only => [:create, :update, :destroy] do
+    collection do
+      SETTINGS[:user][:lists].each do |lname|
+        get lname
+      end
+    end
+  end
 
   devise_for :users
 
