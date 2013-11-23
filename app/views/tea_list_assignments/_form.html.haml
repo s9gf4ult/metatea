@@ -1,0 +1,10 @@
+= simple_form_for(@tea_list_assignment) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :user_id
+    = f.input :tea_id
+    = f.input :list_name
+
+  .form-actions
+    = f.button :submit

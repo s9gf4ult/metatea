@@ -1,5 +1,8 @@
 Metatea::Application.routes.draw do
 
+  resources :tea_list_assignments
+
+
   root :to => "teas#index"
 
   devise_for :users

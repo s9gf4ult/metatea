@@ -11,11 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131123120701) do
+ActiveRecord::Schema.define(:version => 20131123125857) do
 
   create_table "tea_links", :force => true do |t|
     t.integer  "tea_id"
     t.string   "link"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tea_list_assignments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "tea_id"
+    t.string   "list_name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

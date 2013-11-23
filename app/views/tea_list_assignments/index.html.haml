@@ -1,0 +1,23 @@
+%h1 Listing tea_list_assignments
+
+%table
+  %tr
+    %th User
+    %th Tea
+    %th List name
+    %th
+    %th
+    %th
+
+  - @tea_list_assignments.each do |tea_list_assignment|
+    %tr
+      %td= tea_list_assignment.user_id
+      %td= tea_list_assignment.tea_id
+      %td= tea_list_assignment.list_name
+      %td= link_to 'Show', tea_list_assignment
+      %td= link_to 'Edit', edit_tea_list_assignment_path(tea_list_assignment)
+      %td= link_to 'Destroy', tea_list_assignment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Tea list assignment', new_tea_list_assignment_path
