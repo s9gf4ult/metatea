@@ -9,6 +9,6 @@ class Tea < ActiveRecord::Base
   has_many :tea_links, :dependent => :destroy
   belongs_to :user
 
-  has_many :tea_list_assignments
+  has_many :tea_list_assignments, :dependent => :destroy
   has_many :users, :through => :tea_list_assignments
 end

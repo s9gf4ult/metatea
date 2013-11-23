@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
-  has_many :tea_list_assignments
+  has_many :tea_list_assignments, :dependent => :destroy
   has_many :teas, :through => :tea_list_assignments
 
   def teas_in_list(list_name)
