@@ -1,4 +1,5 @@
 class TeasController < ApplicationController
+  before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :delete]
   # GET /teas
   # GET /teas.json
   def index
@@ -44,7 +45,7 @@ class TeasController < ApplicationController
   # POST /teas.json
   def create
     @tea = Tea.new(params[:tea])
-
+    @tea.user = current_user
     respond_to do |format|
       if @tea.save
         format.html { redirect_to @tea, notice: 'Tea was successfully created.' }
