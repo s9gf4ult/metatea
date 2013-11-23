@@ -13,6 +13,9 @@
       .span-4
         %div= render :partial => "layouts/categories"
 
+        - if user_signed_in?
+          %div= render :partial => "layouts/user_lists"
+
         = yield :left_panel
 
       .span-20.last
