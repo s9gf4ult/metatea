@@ -1,0 +1,4 @@
+= link_to teas_path do
+  = t :all_categories
+%br/
+= hash_links_tree SETTINGS[:tea][:categories], "20px"

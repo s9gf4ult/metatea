@@ -1,24 +1,27 @@
-%h1 Listing teas
+- if @teas.count > 0
+  %h1 Listing teas
 
-%table
-  %tr
-    %th Name
-    %th Picture
-    %th Factory
-    %th Category
-    %th
-    %th
-    %th
-
-  - @teas.each do |tea|
+  %table
     %tr
-      %td= tea.name
-      %td= image_tag(tea.tea_pictures.first.picture.url(:small))
-      %td= tea.factory
-      %td= tea.category
-      %td= link_to 'Show', tea
-      %td= link_to 'Edit', edit_tea_path(tea)
-      %td= link_to 'Destroy', tea, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th Name
+      %th Picture
+      %th Factory
+      %th Category
+      %th
+      %th
+      %th
+
+    - @teas.each do |tea|
+      %tr
+        %td= tea.name
+        %td= image_tag(tea.tea_pictures.first.picture.url(:small)) if tea.tea_pictures.length > 0
+        %td= tea.factory
+        %td= tea.category
+        %td= link_to 'Show', tea
+        %td= link_to 'Edit', edit_tea_path(tea)
+        %td= link_to 'Destroy', tea, :method => :delete, :data => { :confirm => 'Are you sure?' }
+- else
+  %h1 There is no one tea for now
 
 %div
   = link_to 'New Tea', new_tea_path

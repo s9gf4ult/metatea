@@ -6,16 +6,17 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    .header
-      = yield :header
-    .left-panel
-      .left-panel-element
-        %div
-          = link_to teas_path do
-            = t :all_categories
+    .container
+      .span-24
+        = render :partial => "layouts/header"
 
-        = hash_links_tree SETTINGS[:tea][:categories], "20px"
+      .span-4
+        %div= render :partial => "layouts/categories"
 
-      = yield :left_panel
-    .content
-      = yield
+        = yield :left_panel
+
+      .span-20.last
+        = yield
+
+      .span-24.last
+        = yield :footer
