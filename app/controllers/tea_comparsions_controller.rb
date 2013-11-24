@@ -1,4 +1,17 @@
 class TeaComparsionsController < ApplicationController
+  before_filter :authenticate_user!
+
+  # GET
+  def select_second
+
+  end
+
+  # GET
+  def comparsion
+
+  end
+
+
   # GET /tea_comparsions
   # GET /tea_comparsions.json
   def index
@@ -40,7 +53,13 @@ class TeaComparsionsController < ApplicationController
   # POST /tea_comparsions
   # POST /tea_comparsions.json
   def create
+    @left_tea = Tea.find params[:tea_comparsion][:left_tea_id]
+    @right_tea = Tea.find params[:tea_comparsion][:right_tea_id]
+
     @tea_comparsion = TeaComparsion.new(params[:tea_comparsion])
+    @tea_comparsion.left_tea = @left_tea
+    @tea_comparsion.right_tea = @right_tea
+    @tea_comparsion.user = current_user
 
     respond_to do |format|
       if @tea_comparsion.save

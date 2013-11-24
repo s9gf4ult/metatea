@@ -17,3 +17,5 @@
     - :flavor
     - :unusual
     - :quality
+  :grade:
+    - 10

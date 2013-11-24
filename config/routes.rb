@@ -1,10 +1,17 @@
 Metatea::Application.routes.draw do
 
-
-  resources :tea_comparsions
-
-
   root :to => "teas#index"
+
+  devise_for :users
+
+  resources :tea_comparsions do
+    collection do
+      scope "compare" do
+        get "/:first_tea_id", :to => :select_second
+        get "/:first_tea_id/:second_tea_id", :to => :comparsion
+      end
+    end
+  end
 
   resources :tea_list_assignments, :only => [:create, :update, :destroy] do
     collection do
@@ -14,13 +21,9 @@ Metatea::Application.routes.draw do
     end
   end
 
-  devise_for :users
-
   resources :tea_links
 
-
   resources :tea_pictures
-
 
   resources :teas
 
