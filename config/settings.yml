@@ -10,3 +10,10 @@
   :lists:
     - :tried
     - :want_by
+
+:axis:
+  :names:
+    - :high
+    - :flavor
+    - :unusual
+    - :quality
