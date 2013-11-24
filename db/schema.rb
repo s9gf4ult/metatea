@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131124104912) do
+ActiveRecord::Schema.define(:version => 20131124105446) do
 
   create_table "tea_comparsions", :force => true do |t|
     t.integer  "left_tea_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20131124104912) do
     t.integer  "result"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "user_id"
   end
 
   create_table "tea_links", :force => true do |t|
