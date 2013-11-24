@@ -1,0 +1,11 @@
+= simple_form_for(@tea_comparsion) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :left_tea_id
+    = f.input :right_tea_id
+    = f.input :axis_name
+    = f.input :result
+
+  .form-actions
+    = f.button :submit

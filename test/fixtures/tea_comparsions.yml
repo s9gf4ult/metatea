@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  left_tea_id: 1
+  right_tea_id: 1
+  axis_name: MyString
+  result: 1
+
+two:
+  left_tea_id: 1
+  right_tea_id: 1
+  axis_name: MyString
+  result: 1

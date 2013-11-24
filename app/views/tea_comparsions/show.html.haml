@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Left tea:
+  = @tea_comparsion.left_tea_id
+%p
+  %b Right tea:
+  = @tea_comparsion.right_tea_id
+%p
+  %b Axis name:
+  = @tea_comparsion.axis_name
+%p
+  %b Result:
+  = @tea_comparsion.result
+
+= link_to 'Edit', edit_tea_comparsion_path(@tea_comparsion)
+\|
+= link_to 'Back', tea_comparsions_path

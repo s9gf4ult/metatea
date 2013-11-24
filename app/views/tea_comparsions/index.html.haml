@@ -1,0 +1,25 @@
+%h1 Listing tea_comparsions
+
+%table
+  %tr
+    %th Left tea
+    %th Right tea
+    %th Axis name
+    %th Result
+    %th
+    %th
+    %th
+
+  - @tea_comparsions.each do |tea_comparsion|
+    %tr
+      %td= tea_comparsion.left_tea_id
+      %td= tea_comparsion.right_tea_id
+      %td= tea_comparsion.axis_name
+      %td= tea_comparsion.result
+      %td= link_to 'Show', tea_comparsion
+      %td= link_to 'Edit', edit_tea_comparsion_path(tea_comparsion)
+      %td= link_to 'Destroy', tea_comparsion, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Tea comparsion', new_tea_comparsion_path

@@ -1,6 +1,9 @@
 Metatea::Application.routes.draw do
 
 
+  resources :tea_comparsions
+
+
   root :to => "teas#index"
 
   resources :tea_list_assignments, :only => [:create, :update, :destroy] do
