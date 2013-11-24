@@ -1,0 +1,8 @@
+%table
+  %tr
+    %th Name
+    %th Picture
+  - @teas.each do |tea|
+    %tr
+      %td= link_to tea.name, compare_teas_path(@first_tea, tea)
+      %td= image_tag(tea.tea_pictures.first.picture.url(:small)) if tea.tea_pictures.length > 0

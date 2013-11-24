@@ -3,12 +3,15 @@ class TeaComparsionsController < ApplicationController
 
   # GET
   def select_second
+    @first_tea = Tea.find params[:first_tea_id]
+    @teas = current_user.teas_in_list(:tried).where('teas.id <> ?', @first_tea.id)
 
   end
 
   # GET
   def comparsion
-
+    @first_tea = Tea.find params[:first_tea_id]
+    @second_tea = Tea.find params[:second_tea_id]
   end
 
 

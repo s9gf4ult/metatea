@@ -17,4 +17,5 @@ class Tea < ActiveRecord::Base
 
   has_many :righ_teas, :through => :tea_comparsions_as_left, :source => :right_tea
   has_many :left_teas, :through => :tea_comparsions_as_right, :source => :left_tea
+
 end

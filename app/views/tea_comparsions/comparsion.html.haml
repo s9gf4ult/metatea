@@ -1,0 +1,10 @@
+.span-8
+  = image_tag(@first_tea.tea_pictures.first.picture.url(:medium)) if @first_tea.tea_pictures.length > 0
+
+%h1.span-2.large VS
+
+.span-8.last
+  = image_tag(@second_tea.tea_pictures.first.picture.url(:medium)) if @second_tea.tea_pictures.length > 0
+
+-# - SETTINGS[:axis][:names].each do |axis_name|
+  -# = render :partial => :axis, :locals => {:axis_name
