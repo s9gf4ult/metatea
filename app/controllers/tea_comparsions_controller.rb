@@ -1,4 +1,6 @@
 class TeaComparsionsController < ApplicationController
+  include TeaComparsionsHelper
+
   before_filter :authenticate_user!
 
   # GET
@@ -63,13 +65,16 @@ class TeaComparsionsController < ApplicationController
     @tea_comparsion.left_tea = @left_tea
     @tea_comparsion.right_tea = @right_tea
     @tea_comparsion.user = current_user
+    TeaComparsion.where(:user_id => current_user.id, :axis_name => @tea_comparsion.axis_name).with_teas(@left_tea, @right_tea).delete_all
 
     respond_to do |format|
       if @tea_comparsion.save
-        format.html { redirect_to @tea_comparsion, notice: 'Tea comparsion was successfully created.' }
+        # puts ">>>>>>>>>>> #{@left_tea.id}"
+        # puts ">>>>>>>>>>> #{@right_tea.id}"
+        format.html { redirect_to compare_teas_path(@left_tea, @right_tea), notice: 'Tea comparsion was successfully created.' }
         format.json { render json: @tea_comparsion, status: :created, location: @tea_comparsion }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to compare_teas_path(@left_tea, @right_tea), :warning => "Could not create comparion" }
         format.json { render json: @tea_comparsion.errors, status: :unprocessable_entity }
       end
     end
@@ -95,10 +100,12 @@ class TeaComparsionsController < ApplicationController
   # DELETE /tea_comparsions/1.json
   def destroy
     @tea_comparsion = TeaComparsion.find(params[:id])
+    left_tea = @tea_comparsion.left_tea
+    right_tea = @tea_comparsion.right_tea
     @tea_comparsion.destroy
 
     respond_to do |format|
-      format.html { redirect_to tea_comparsions_url }
+      format.html { redirect_to compare_teas_path(left_tea, right_tea) }
       format.json { head :no_content }
     end
   end

@@ -12,6 +12,10 @@ class TeaComparsion < ActiveRecord::Base
   belongs_to :left_tea, :class_name => "Tea", :foreign_key => "left_tea_id"
   belongs_to :right_tea, :class_name => "Tea", :foreign_key => "right_tea_id"
 
+  scope :with_teas, lambda {|tea1, tea2|
+    where("(left_tea_id = ? and right_tea_id = ?) or (right_tea_id = ? and left_tea_id = ?)", tea1.id, tea2.id, tea1.id, tea2.id)
+  }
+
   protected
 
   def backward_comparsion_doesnt_exists

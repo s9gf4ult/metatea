@@ -4,7 +4,7 @@ Metatea::Application.routes.draw do
 
   devise_for :users
 
-  resources :tea_comparsions do
+  resources :tea_comparsions, :only => [:create, :destroy] do
     collection do
       scope "compare" do
         get "/:first_tea_id", :to => :select_second
