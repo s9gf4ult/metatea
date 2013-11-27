@@ -67,14 +67,21 @@ class TeaComparsionsController < ApplicationController
     @tea_comparsion.user = current_user
     TeaComparsion.where(:user_id => current_user.id, :axis_name => @tea_comparsion.axis_name).with_teas(@left_tea, @right_tea).delete_all
 
+    fid = params[:first_tea_id]
+    if fid && (fid.to_i == @left_tea.id.to_i)
+      @first_tea = @left_tea
+      @second_tea = @right_tea
+    else
+      @first_tea = @right_tea
+      @second_tea = @left_tea
+    end
+
     respond_to do |format|
       if @tea_comparsion.save
-        # puts ">>>>>>>>>>> #{@left_tea.id}"
-        # puts ">>>>>>>>>>> #{@right_tea.id}"
-        format.html { redirect_to compare_teas_path(@left_tea, @right_tea), notice: 'Tea comparsion was successfully created.' }
+        format.html { redirect_to compare_teas_path(@first_tea, @second_tea), notice: 'Tea comparsion was successfully created.' }
         format.json { render json: @tea_comparsion, status: :created, location: @tea_comparsion }
       else
-        format.html { redirect_to compare_teas_path(@left_tea, @right_tea), :warning => "Could not create comparion" }
+        format.html { redirect_to compare_teas_path(@first_tea, @second_tea), :warning => "Could not create comparion" }
         format.json { render json: @tea_comparsion.errors, status: :unprocessable_entity }
       end
     end
@@ -102,10 +109,18 @@ class TeaComparsionsController < ApplicationController
     @tea_comparsion = TeaComparsion.find(params[:id])
     left_tea = @tea_comparsion.left_tea
     right_tea = @tea_comparsion.right_tea
-    @tea_comparsion.destroy
+    fid = params[:first_tea_id]
+    if fid && fid.to_i == left_tea.id.to_i
+      first_tea = left_tea
+      second_tea = right_tea
+    else
+      first_tea = right_tea
+      second_tea = left_tea
+    end
 
+    @tea_comparsion.destroy
     respond_to do |format|
-      format.html { redirect_to compare_teas_path(left_tea, right_tea) }
+      format.html { redirect_to compare_teas_path(first_tea, second_tea) }
       format.json { head :no_content }
     end
   end
