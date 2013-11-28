@@ -2,9 +2,18 @@
 
 FactoryGirl.define do
   factory :tea do
-    category "raw_puerh"        #  FIXME: create random
-    factory Faker::Company.name
-    name Faker::Lorem.words
+    category do
+      Faker::Lorem.words
+    end
+
+    sequence :factory do |n|
+      "factory #{n}"
+    end
+
+    name do
+      Faker::Lorem.words
+    end
+
     user_id do
       u = create :user
       u.id

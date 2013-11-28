@@ -1,5 +1,5 @@
 class TeasController < ApplicationController
-  before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :delete]
+  before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :destroy]
   # GET /teas
   # GET /teas.json
   def index
@@ -61,14 +61,19 @@ class TeasController < ApplicationController
   # PUT /teas/1.json
   def update
     @tea = Tea.find(params[:id])
-
-    respond_to do |format|
-      if @tea.update_attributes(params[:tea])
-        format.html { redirect_to @tea, notice: 'Tea was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @tea.errors, status: :unprocessable_entity }
+    if @tea.user == current_user
+      respond_to do |format|
+        if @tea.update_attributes(params[:tea])
+          format.html { redirect_to @tea, notice: 'Tea was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @tea.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to teas_path, :warning => "You can not modify this tea" }
       end
     end
   end
@@ -77,11 +82,17 @@ class TeasController < ApplicationController
   # DELETE /teas/1.json
   def destroy
     @tea = Tea.find(params[:id])
-    @tea.destroy
+    if @tea.user == current_user
+      @tea.destroy
 
-    respond_to do |format|
-      format.html { redirect_to teas_url }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to teas_path }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to teas_path, :warning => "You can not delete this tea" }
+      end
     end
   end
 end
