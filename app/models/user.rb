@@ -10,11 +10,12 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :tea_list_assignments, :dependent => :destroy
-  has_many :teas, :through => :tea_list_assignments
-  has_many :tea_comparsions
+  has_many :teas
+  has_many :assigned_teas, :through => :tea_list_assignments, :source => :tea
+  has_many :tea_comparsions, :dependent => :destroy
 
   def teas_in_list(list_name)
-    self.teas.where("tea_list_assignments.list_name" => list_name)
+    self.assigned_teas.where("tea_list_assignments.list_name" => list_name)
   end
 
   def named_tea_assignment(list_name, tea)
