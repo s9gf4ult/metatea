@@ -13,7 +13,7 @@ Metatea::Application.routes.draw do
     end
   end
 
-  resources :tea_list_assignments, :only => [:create, :update, :destroy] do
+  resources :tea_list_assignments, :only => [:create, :destroy] do
     collection do
       SETTINGS[:user][:lists].each do |lname|
         get lname
