@@ -8,4 +8,6 @@ class TeaPicture < ActiveRecord::Base
   belongs_to :user
 
   has_attached_file :picture, :styles => {:small => "50x50>", :medium => "300x300>"}
+
+  default_scope { order "created_at DESC" }
 end

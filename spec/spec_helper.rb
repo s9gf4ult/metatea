@@ -39,4 +39,5 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
 
   include ActionDispatch::TestProcess
+
 end

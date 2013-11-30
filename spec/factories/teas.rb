@@ -1,9 +1,11 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
+
   factory :tea do
+
     category do
-      Faker::Lorem.words
+      TeasHelper.hash_values_list(SETTINGS[:tea][:categories]).sample
     end
 
     sequence :factory do |n|
@@ -11,7 +13,7 @@ FactoryGirl.define do
     end
 
     name do
-      Faker::Lorem.words
+      Faker::Lorem.words.sample
     end
 
     user_id do

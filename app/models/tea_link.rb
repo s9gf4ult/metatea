@@ -6,4 +6,6 @@ class TeaLink < ActiveRecord::Base
   validates :user_id, :presence => true
   belongs_to :tea
   belongs_to :user
+
+  default_scope { order "created_at DESC" }
 end
