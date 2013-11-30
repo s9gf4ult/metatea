@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :teas
   has_many :assigned_teas, :through => :tea_list_assignments, :source => :tea
   has_many :tea_comparsions, :dependent => :destroy
+  has_many :tea_pictures
 
   def teas_in_list(list_name)
     self.assigned_teas.where("tea_list_assignments.list_name" => list_name)

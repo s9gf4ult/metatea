@@ -37,4 +37,6 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include Devise::TestHelpers, :type => :controller
+
+  include ActionDispatch::TestProcess
 end

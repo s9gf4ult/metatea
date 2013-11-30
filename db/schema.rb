@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131124105446) do
+ActiveRecord::Schema.define(:version => 20131130133316) do
 
   create_table "tea_comparsions", :force => true do |t|
     t.integer  "left_tea_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20131124105446) do
     t.string   "link"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "tea_list_assignments", :force => true do |t|
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20131124105446) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.integer  "user_id"
   end
 
   create_table "teas", :force => true do |t|

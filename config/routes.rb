@@ -21,9 +21,9 @@ Metatea::Application.routes.draw do
     end
   end
 
-  resources :tea_links
+  resources :tea_links, :only => [:create, :destroy, :new]
 
-  resources :tea_pictures
+  resources :tea_pictures, :only => [:create, :destroy, :new, :show]
 
   resources :teas
 
