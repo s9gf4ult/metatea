@@ -34,7 +34,17 @@
 
 = link_to "Attach picture", new_tea_picture_path("tea[id]" => @tea.id)
 
+= link_to "Attach link", new_tea_link_path("tea[id]" => @tea.id)
 
 = link_to 'Edit', edit_tea_path(@tea)
 \|
 = link_to 'Back', teas_path
+
+- if user_signed_in?
+  %div= render :partial => "comment_form"
+
+.comments_list
+  - @tea.comments.recent.all.each do |comment|
+    .comment
+      %p= comment.user.email if comment.user
+      %p= comment.comment

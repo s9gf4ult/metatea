@@ -25,7 +25,11 @@ Metatea::Application.routes.draw do
 
   resources :tea_pictures, :only => [:create, :destroy, :new, :show]
 
-  resources :teas
+  resources :teas do
+    member do
+      post :comment
+    end
+  end
 
 
   # The priority is based upon order of creation:

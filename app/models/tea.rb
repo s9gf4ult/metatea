@@ -1,5 +1,6 @@
 class Tea < ActiveRecord::Base
   attr_accessible :category, :factory, :name, :user_id
+  acts_as_commentable
 
   validates :name, :presence => true
   validates :category, :presence => true

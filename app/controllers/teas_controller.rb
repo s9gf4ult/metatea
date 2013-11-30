@@ -1,5 +1,5 @@
 class TeasController < ApplicationController
-  before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :destroy]
+  before_filter :authenticate_user!, :except => [:index, :show]
   # GET /teas
   # GET /teas.json
   def index
@@ -95,4 +95,17 @@ class TeasController < ApplicationController
       end
     end
   end
+
+  # POST
+  def comment
+    @tea = Tea.find params[:id]
+    comment = @tea.comments.new
+    comment.comment = params[:tea][:comment]
+    comment.user = current_user
+    comment.save
+    respond_to do |format|
+      format.html { redirect_to @tea }
+    end
+  end
+
 end
