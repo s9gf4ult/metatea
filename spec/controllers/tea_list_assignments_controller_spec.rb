@@ -53,24 +53,65 @@ describe TeaListAssignmentsController do
   end
 
   describe "DELETE destroy" do
-    before :each do
-      @assign = TeaListAssignment.create @assign_attrs
+    describe "when :tried assignment" do
+
+      before :each do
+        @assign_attrs = FactoryGirl.attributes_for(:tea_list_assignment,
+                                                   :tea_id => @tea.id,
+                                                   :user_id => @user.id,
+                                                   :list_name => :tried)
+        @assign = TeaListAssignment.create @assign_attrs
+      end
+
+      describe "and there is my comparsion" do
+        before :each do
+          @comparsion = FactoryGirl.create(:tea_comparsion,
+                                           :left_tea_id => @tea.id,
+                                           :user_id => @user.id)
+        end
+
+        it "removes comparsion" do
+          expect do
+            delete :destroy, {:id => @assign.to_param}
+          end.to change(TeaComparsion, :count).by(-1)
+        end
+      end
+
+      describe "and there is foreign comparsion" do
+        before :each do
+          @comparsion = FactoryGirl.create(:tea_comparsion,
+                                           :left_tea_id => @tea.id)
+        end
+
+        it "does not remove comparsion" do
+          expect do
+            delete :destroy, {:id => @assign.to_param}
+          end.to_not change(TeaComparsion, :count)
+        end
+      end
     end
 
-    it "destroys the requested tea_list_assignment" do
-      expect {
-        delete :destroy, {:id => @assign.to_param}
-      }.to change(TeaListAssignment, :count).by(-1)
-    end
 
-    describe "when other user" do
-      other_user
-      it "do not destroy" do
-        expect do
+
+    describe "when simple assignment" do
+      before :each do
+        @assign = TeaListAssignment.create @assign_attrs
+      end
+
+      it "destroys the requested tea_list_assignment" do
+        expect {
           delete :destroy, {:id => @assign.to_param}
-        end.to_not change(TeaListAssignment, :count)
+        }.to change(TeaListAssignment, :count).by(-1)
+      end
+
+      describe "when other user" do
+        other_user
+        it "do not destroy" do
+          expect do
+            delete :destroy, {:id => @assign.to_param}
+          end.to_not change(TeaListAssignment, :count)
+        end
       end
     end
   end
-
 end

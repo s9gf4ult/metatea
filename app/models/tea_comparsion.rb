@@ -16,6 +16,10 @@ class TeaComparsion < ActiveRecord::Base
     where("(left_tea_id = ? and right_tea_id = ?) or (right_tea_id = ? and left_tea_id = ?)", tea1.id, tea2.id, tea1.id, tea2.id)
   }
 
+  scope :with_tea, lambda {|tea|
+    where("(left_tea_id = ? or right_tea_id = ?)", tea.id, tea.id)
+  }
+
   protected
 
   def backward_comparsion_doesnt_exists

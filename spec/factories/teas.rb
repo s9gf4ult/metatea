@@ -12,6 +12,12 @@ FactoryGirl.define do
       "factory #{n}"
     end
 
+    collection_date do
+      from = Time.new(1950, 1, 1)
+      to = Time.now
+      Time.at(from + rand * (to.to_f - from.to_f))
+    end
+
     name do
       Faker::Lorem.words.sample
     end
