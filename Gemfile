@@ -11,6 +11,7 @@ gem 'simple_form'
 gem 'paperclip'
 gem 'devise'
 gem 'acts_as_commentable', '3.0.1'
+gem 'russian', '~> 0.6.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

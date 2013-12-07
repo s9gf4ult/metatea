@@ -39,6 +39,11 @@ class TeasController < ApplicationController
   # GET /teas/1/edit
   def edit
     @tea = Tea.find(params[:id])
+    unless @tea.user == current_user
+      respond_to do |f|
+        f.html { redirect_to teas_path, :note => "You are not owner of this rea" }
+      end
+    end
   end
 
   # POST /teas
