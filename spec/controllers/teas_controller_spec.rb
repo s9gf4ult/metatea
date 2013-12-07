@@ -249,6 +249,27 @@ describe TeasController do
         response.should redirect_to(teas_url)
       end
 
+      describe "when tea in other user's list" do
+        before :each do
+          @new_user = FactoryGirl.create :user
+          @assignment = FactoryGirl.create(:tea_list_assignment,
+                                           :user_id => @new_user.id,
+                                           :tea_id => @tea.id)
+        end
+
+        it "does not delete tea" do
+          expect do
+            delete :destroy, {:id => @tea.to_param}
+          end.to_not change(Tea, :count)
+        end
+
+        it "assigns tea to new user from list" do
+          delete :destroy, {:id => @tea.to_param}
+          @tea.reload           # it is changed in database
+          @tea.user.id.should eq(@new_user.id)
+        end
+      end
+
       describe "with different user" do
         different_user
 

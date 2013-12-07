@@ -63,7 +63,7 @@ class TeasController < ApplicationController
     @tea = Tea.find(params[:id])
     if @tea.user == current_user
       respond_to do |format|
-        if @tea.update_attributes(params[:tea])
+        if @tea.update_attributes(params[:tea].except(:user_id))
           format.html { redirect_to @tea, notice: 'Tea was successfully updated.' }
           format.json { head :no_content }
         else
@@ -83,11 +83,23 @@ class TeasController < ApplicationController
   def destroy
     @tea = Tea.find(params[:id])
     if @tea.user == current_user
-      @tea.destroy
-
+      other = @tea.choose_other_user
       respond_to do |format|
-        format.html { redirect_to teas_path }
-        format.json { head :no_content }
+        if other                # there is otner users who own this tea in list
+          @tea.user = other
+          if @tea.save
+            format.html { redirect_to teas_path }
+            format.json { head :no_content }
+          else
+            @tea.destroy
+            format.html { redirect_to teas_path }
+            format.json { head :no_content }
+          end
+        else
+          @tea.destroy          # realy stupid
+          format.html { redirect_to teas_path }
+          format.json { head :no_content }
+        end
       end
     else
       respond_to do |format|
