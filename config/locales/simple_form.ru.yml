@@ -1,0 +1,8 @@
+ru:
+  simple_form:
+    labels:
+      tea:
+        name: Название
+        factory: Фабрика
+        category: Категория
+        collection_date: Дата сбора

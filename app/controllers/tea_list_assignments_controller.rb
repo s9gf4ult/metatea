@@ -5,7 +5,7 @@ class TeaListAssignmentsController < ApplicationController
     define_method lname do
       @teas = current_user.teas_in_list(lname)
       respond_to do |format|
-        format.html { render "teas/index" }
+        format.html { render "teas_list" }
         format.json { render :json => @teas }
       end
     end

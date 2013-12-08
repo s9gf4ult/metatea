@@ -1,0 +1,30 @@
+- if tea.user == current_user
+  .span-19.last.show_tea_block
+    %div
+      .span-2
+        = link_to tea, :method => :delete do
+          = t :remove_tea
+      .span-2
+        = link_to edit_tea_path(tea) do
+          = t :edit_tea
+
+.span-19.last.show_tea_block
+  %div
+    - SETTINGS[:user][:lists].each do |list_name|
+      .span-8
+        - assignment = current_user.named_tea_assignment(list_name, tea)
+        - if assignment
+          - if list_name == :tried
+            = link_to assignment, :method => :delete, :confirm => t(:confirm_remove_from_list_tried) do
+              = t "remove_from_list_#{list_name}"
+          - else
+            = link_to assignment, :method => :delete do
+              = t "remove_from_list_#{list_name}"
+        - else
+          = link_to tea_list_assignments_path("tea_list_assignment[list_name]" => list_name, "tea_list_assignment[tea_id]" => tea.id), :method => :post do
+            = t "add_to_list_#{list_name}"
+
+.span-19.last.show_tea_block
+  %div
+    = link_to select_second_tea_path(tea) do
+      = t :compare_tea

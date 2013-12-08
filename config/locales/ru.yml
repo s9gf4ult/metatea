@@ -1,6 +1,4 @@
 ru:
-  # date:
-  #   order:
-  #     - :year
-  #     - :month
-  #     - :day
+  # site_info: "Информация о сайте"
+  # hello_user: "Привет, %{user}"
+  # logout: "Выйти"

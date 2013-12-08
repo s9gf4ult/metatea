@@ -1,0 +1,19 @@
+%table
+  %tr
+    %th= t :tea_name
+    %th= t :tea_picture
+    %th= t :tea_category
+    %th= t :tea_factory
+    %th= t :tea_collection_date
+
+  - teas.each do |tea|
+    %tr
+      %td= link_to tea.name, tea
+      %td
+        = link_to tea do
+          = image_tag(tea.tea_pictures.first.picture.url(:small)) if tea.tea_pictures.length > 0
+      %td
+        = link_to teas_path("tea[category]" => tea.category) do
+          = t tea.category
+      %td= tea.factory
+      %td= tea.collection_date

@@ -1,4 +1,9 @@
-= link_to teas_path do
-  = t :all_categories
-%br/
-= hash_links_tree SETTINGS[:tea][:categories], "20px"
+.sidebar_block__header
+  %div= t :categories
+
+.sidebar_block__content
+  %div
+    = link_to teas_path do
+      = t :all_categories
+
+    = hash_links_tree SETTINGS[:tea][:categories], "20px"

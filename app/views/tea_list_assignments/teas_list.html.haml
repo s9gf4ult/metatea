@@ -1,0 +1,4 @@
+- if @teas.count > 0
+  = render :partial => "teas/teas_table", :locals => {:teas => @teas}
+- else
+  %h1= t :there_is_no_teas_in_list

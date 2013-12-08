@@ -1,27 +1,7 @@
 - if @teas.count > 0
-  %h1 Listing teas
-
-  %table
-    %tr
-      %th Name
-      %th Picture
-      %th Factory
-      %th Category
-      %th
-      %th
-      %th
-
-    - @teas.each do |tea|
-      %tr
-        %td= tea.name
-        %td= image_tag(tea.tea_pictures.first.picture.url(:small)) if tea.tea_pictures.length > 0
-        %td= tea.factory
-        %td= tea.category
-        %td= link_to 'Show', tea
-        %td= link_to 'Edit', edit_tea_path(tea)
-        %td= link_to 'Destroy', tea, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  = render :partial => "teas_table", :locals => {:teas => @teas}
 - else
-  %h1 There is no one tea for now
+  %h1= t :there_is_no_teas
 
 %div
-  = link_to 'New Tea', new_tea_path
+  = link_to (t :new_tea), new_tea_path

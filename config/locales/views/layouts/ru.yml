@@ -1,0 +1,22 @@
+ru:
+  header_metatea: Чайный журнал Метачай
+
+  site_info: "Этот сайт"
+  hello_user: "Привет, %{user}"
+  logout: "Выйти"
+  sign_up: "Зарегистрироваться"
+  sign_in: "Войти"
+
+  categories: "Категории"
+  all_categories: "Все категории"
+
+  puerh: "Пуэр"
+  raw_puerh: "Шен Пуэр"
+  ripe_puerh: "Шу Пуэр"
+  teguanin: "Те Гуаньинь"
+  other: "Другое"
+
+  your_lists: "Чаи, которые вы"
+  tried: "Пробовали"
+  want_try: "Хотите попробовать"
+  want_by: "Хотите купить"

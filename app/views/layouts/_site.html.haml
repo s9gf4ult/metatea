@@ -1,0 +1,17 @@
+.sidebar_block__header
+  %div= t :site_info
+
+.sidebar_block__content
+  %div
+    - if user_signed_in?
+      %div= t :hello_user, :user => current_user.email
+      %div
+        = link_to destroy_user_session_path, :method => :delete do
+          = t :logout
+    - else
+      %div
+        = link_to new_user_registration_path do
+          = t :sign_up
+      %div
+        = link_to new_user_session_path do
+          = t :sign_in

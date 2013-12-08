@@ -26,7 +26,7 @@ class TeaComparsionsController < ApplicationController
     @tea_comparsion.left_tea = @left_tea
     @tea_comparsion.right_tea = @right_tea
     @tea_comparsion.user = current_user
-    TeaComparsion.where(:user_id => current_user.id, :axis_name => @tea_comparsion.axis_name).with_teas(@left_tea, @right_tea).delete_all
+    TeaComparsion.where(:user_id => current_user.id, :axis_name => @tea_comparsion.axis_name).with_teas(@left_tea, @right_tea).destroy_all
 
     fid = params[:first_tea_id]
     if fid && (fid.to_i == @left_tea.id.to_i)

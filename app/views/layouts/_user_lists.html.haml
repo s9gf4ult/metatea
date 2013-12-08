@@ -1,2 +1,9 @@
-- SETTINGS[:user][:lists].each do |list|
-  %div= link_to list, send("#{list}_tea_list_assignments_path")
+.sidebar_block__header
+  %div= t :your_lists
+
+.sidebar_block__content
+  %div
+    - SETTINGS[:user][:lists].each do |list|
+      %div
+        = link_to send("#{list}_tea_list_assignments_path") do
+          = t list

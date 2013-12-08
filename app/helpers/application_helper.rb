@@ -10,7 +10,7 @@ module ApplicationHelper
       else
         s = v == selected if selected
         content_tag :option, :value => v, :selected => s do
-          t k
+          t v
         end
       end
     end.reduce(:concat)
@@ -19,15 +19,17 @@ module ApplicationHelper
   def hash_links_tree(h, lmargin)
     h.collect do |k, v|
       if v.is_a? Hash
-        r = t(k)
-        r << content_tag(:div, :style => "margin-left: #{lmargin}") do
+        r = content_tag :div do
+          t(k)
+        end
+        r << content_tag(:div, :style => "padding-left: #{lmargin}") do
           hash_links_tree v, lmargin
         end
         r
       else
         content_tag :div do
           link_to teas_path("tea[category]" => v) do
-            t k
+            t v
           end
         end
       end

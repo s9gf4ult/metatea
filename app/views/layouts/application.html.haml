@@ -7,19 +7,27 @@
     = csrf_meta_tags
   %body
     .container
-      .span-24
-        = render :partial => "layouts/header"
+      .span-24.last.site_header
+        %div
+          %h1= t :header_metatea
+      .span-24.last
+        %hr{:style => "margin-top: 0px; margin-bottom: 0px; color: black; size: 2px;"}
+      .span-5
+        .sidebar_block
+          %div= render :partial => "layouts/site"
 
-      .span-4
-        %div= render :partial => "layouts/categories"
+        .sidebar_block
+          %div= render :partial => "layouts/categories"
 
         - if user_signed_in?
-          %div= render :partial => "layouts/user_lists"
+          .sidebar_block
+            %div= render :partial => "layouts/user_lists"
 
         = yield :left_panel
 
-      .span-20.last
-        = yield
+      .span-19.last
+        .page_content
+          %div= yield
 
       .span-24.last
         = yield :footer

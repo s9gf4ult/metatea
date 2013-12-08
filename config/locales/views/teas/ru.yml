@@ -1,0 +1,28 @@
+ru:
+  tea_name: "Название"
+  tea_picture: "Картинка"
+  tea_factory: "Фабрика"
+  tea_category: "Категория"
+  tea_collection_date: Дата сбора
+
+  there_is_no_teas: Нет чаев в этой категории
+
+  new_tea: Добавить чай
+
+  tea_added_by: "Добавил(а): %{user}"
+  tea_category_is: "Категория: %{category}"
+  tea_name_is: "Название: %{name}"
+  tea_collection_date_is: "Дата сбора чая: %{date}"
+  tea_factory_is: "Фабрика: %{factory}"
+
+  remove_from_list_tried: "Удалить из списка попробованных"
+  remove_from_list_want_try: "Не хочу пробовать этот чай"
+
+  add_to_list_tried: "Добавить в список попробованных"
+  add_to_list_want_try: "Хочу попробовать"
+
+  confirm_remove_from_list_tried: "При удалении из списка опробованных чаев удалятся все ваши сравнения, продолжить?"
+  compare_tea: "Сравнить с другим чаем"
+
+  remove_tea: "Удалить"
+  edit_tea: "Редактировать"
