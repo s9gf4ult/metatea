@@ -9,7 +9,7 @@
 .show-tea-block
   %div
     - SETTINGS[:user][:lists].each do |list_name|
-      .span-8
+      %div
         - assignment = current_user.named_tea_assignment(list_name, tea)
         - if assignment
           - if list_name == :tried
