@@ -14,28 +14,22 @@
 - if user_signed_in?
   = render :partial => "user_block", :locals => {:tea => @tea}
 
-.show_tea_block.span-19.last
+.show-tea-block
   %div= render :partial => "tea_pictures", :locals => {:tea => @tea}
 
-.show_tea_block.span-19.last
+.show-tea-block
   %div
     - @tea.tea_links.each do |link|
       = link_to link.link, link.link
 
-.show_tea_block.span-19.last
+.show-tea-block
   %div= link_to "Attach picture", new_tea_picture_path("tea[id]" => @tea.id)
 
-= link_to "Attach link", new_tea_link_path("tea[id]" => @tea.id)
-
-= link_to 'Edit', edit_tea_path(@tea)
-\|
-= link_to 'Back', teas_path
+  %div= link_to "Attach link", new_tea_link_path("tea[id]" => @tea.id)
 
 - if user_signed_in?
-  %div= render :partial => "comment_form"
+  .show-tea-block
+    %div= render :partial => "comment_form"
 
-.comments_list
-  - @tea.comments.recent.all.each do |comment|
-    .comment
-      %p= comment.user.email if comment.user
-      %p= comment.comment
+.show-tea-block
+  %div= render :partial => "comments_list", :locals => {:tea => @tea}

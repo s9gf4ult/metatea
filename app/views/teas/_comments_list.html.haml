@@ -1,0 +1,5 @@
+- tea.comments.each do |comment|
+  .comment
+    %div
+      .comment__user= comment.user.email
+      = comment.comment
