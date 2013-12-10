@@ -17,3 +17,24 @@
     vertical-align: baseline;
     text-align: center;
 }
+
+.comment {
+    background: #DEDEDE;
+    margin-top: 20px;
+    border: 1px solid black;
+}
+
+.comment > div {
+    padding: 5px;
+}
+
+.comment__user {
+    background: #505050;
+    color: white;
+    margin: -5px 0px 5px -5px;
+    float: left;
+}
+
+.comment__user > div {
+    padding: 2px 5px 2px 5px;
+}

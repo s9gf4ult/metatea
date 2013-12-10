@@ -24,19 +24,19 @@
 
 .clearfix
 
-.span-19.last.show-tea-block
+.span-18.last.show-tea-block
   %div= render :partial => "tea_pictures", :locals => {:tea => @tea}
 
 .clearfix
 
-.span-19.last.show-tea-block
+.span-18.last.show-tea-block
   %div
     - @tea.tea_links.each do |link|
       = link_to link.link, link.link
 
 .clearfix
 
-.span-19.last.show-tea-block
+.span-18.last.show-tea-block
   %div
     %div
       = link_to new_tea_picture_path("tea[id]" => @tea.id) do
@@ -49,13 +49,12 @@
 
 - if user_signed_in?
   .clearfix
-  .span-19.last.show-tea-block
-    %div= render :partial => "comment_form"
+  .span-18.last.show-tea-block
+    %div= render :partial => "comment_form", :locals => {:comment => @comment}
 
 .clearfix
-%hr/
 
-.span-19.last.show-tea-block
+.span-18.last.show-tea-block
   %div= render :partial => "comments_list", :locals => {:tea => @tea}
 
 .clearfix

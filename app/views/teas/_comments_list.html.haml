@@ -1,5 +1,9 @@
 - tea.comments.each do |comment|
   .comment
     %div
-      .comment__user= comment.user.email
-      = comment.comment
+      - if comment.user
+        .comment__user
+          %div= comment.user.email
+        .clearfix
+      = simple_format comment.comment
+  .clearfix
