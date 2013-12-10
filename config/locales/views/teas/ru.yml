@@ -26,3 +26,8 @@ ru:
 
   remove_tea: "Удалить"
   edit_tea: "Редактировать"
+
+  attach_tea_picture: "Прикрепить картинку"
+  attach_tea_link: "Прикрепить ссылку"
+
+  confirm_remove_tea: "Удалить этот чай навсегда?"

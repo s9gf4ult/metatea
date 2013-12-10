@@ -1,36 +1,61 @@
 %p#notice= notice
 
-.span-8
-  %div
-    %div= t :tea_name_is, :name => @tea.name
-    %div= t :tea_category_is, :category => @tea.category
-    %div= t :tea_collection_date_is, :date => @tea.collection_date if @tea.collection_date
+%h2 #{@tea.name}
 
 .span-8
-  %div
-    %div= t :tea_added_by, :user => @tea.user.email
-    %div= t :tea_factory_is, :factory => @tea.factory if @tea.factory
+  %div= t :tea_category_is, :category => @tea.category
+  %div= t :tea_collection_date_is, :date => @tea.collection_date if @tea.collection_date
+  %div= t :tea_factory_is, :factory => @tea.factory if @tea.factory
+  %div= t :tea_added_by, :user => @tea.user.email
+
+- if user_signed_in? && @tea.user == current_user
+  .span-8
+    %div
+      = link_to @tea, :method => :delete, :confirm => t(:confirm_remove_tea) do
+        = t :remove_tea
+    %div
+      = link_to edit_tea_path(@tea) do
+        = t :edit_tea
+
+.clearfix
 
 - if user_signed_in?
-  .span-19.last
-    = render :partial => "user_block", :locals => {:tea => @tea}
+  = render :partial => "user_block", :locals => {:tea => @tea}
 
-.show-tea-block
+.clearfix
+
+.span-19.last.show-tea-block
   %div= render :partial => "tea_pictures", :locals => {:tea => @tea}
 
-.show-tea-block
+.clearfix
+
+.span-19.last.show-tea-block
   %div
     - @tea.tea_links.each do |link|
       = link_to link.link, link.link
 
-.show-tea-block
-  %div= link_to "Attach picture", new_tea_picture_path("tea[id]" => @tea.id)
+.clearfix
 
-  %div= link_to "Attach link", new_tea_link_path("tea[id]" => @tea.id)
+.span-19.last.show-tea-block
+  %div
+    %div
+      = link_to new_tea_picture_path("tea[id]" => @tea.id) do
+        = t :attach_tea_picture
+
+    %div
+      = link_to new_tea_link_path("tea[id]" => @tea.id) do
+        = t :attach_tea_link
+
 
 - if user_signed_in?
-  .show-tea-block
+  .clearfix
+  .span-19.last.show-tea-block
     %div= render :partial => "comment_form"
 
-.show-tea-block
+.clearfix
+%hr/
+
+.span-19.last.show-tea-block
   %div= render :partial => "comments_list", :locals => {:tea => @tea}
+
+.clearfix
