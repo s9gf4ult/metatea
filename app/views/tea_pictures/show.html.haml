@@ -1,9 +1,6 @@
 %p#notice= notice
 
-%p
-  %b Tea:
-  = link_to @tea_picture.tea.name, @tea_picture.tea if @tea_picture.tea
-  .tea_picture
-    = image_tag @tea_picture.picture.url
-
-= link_to 'Back', tea_pictures_path
+= link_to @tea_picture.tea.name, @tea_picture.tea if @tea_picture.tea
+.span-18.last
+  = image_tag @tea_picture.picture.url, :class => "tea-picture"
+.clearfix
