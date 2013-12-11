@@ -29,22 +29,29 @@
 
 .clearfix
 
-.span-18.last.show-tea-block
+.span-19.last.show-tea-block
   %div
-    - @tea.tea_links.each do |link|
-      = link_to link.link, link.link
+    = link_to new_tea_picture_path("tea[id]" => @tea.id) do
+      = t :attach_tea_picture
 
 .clearfix
 
+- if @tea.tea_links.length > 0
+  .span-18.last.show-tea-block.tea-links
+    %div
+      .tea-links__header
+        %div= t :tea_links_header
+      .clearfix
+      - @tea.tea_links.each do |link|
+        .tea-link
+          %div= render :partial => "link", :locals => {:link => link}
+
+  .clearfix
+
 .span-18.last.show-tea-block
   %div
-    %div
-      = link_to new_tea_picture_path("tea[id]" => @tea.id) do
-        = t :attach_tea_picture
-
-    %div
-      = link_to new_tea_link_path("tea[id]" => @tea.id) do
-        = t :attach_tea_link
+    = link_to new_tea_link_path("tea[id]" => @tea.id) do
+      = t :attach_tea_link
 
 
 - if user_signed_in?

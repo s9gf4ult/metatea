@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.show-tea-block {
+    margin-top: 10px;
+}
+
 .show-tea-block > div {
     padding-top: 10px;
 }
@@ -31,10 +35,37 @@
 .comment__user {
     background: #505050;
     color: white;
-    margin: -5px 0px 5px -5px;
     float: left;
+    margin: -5px 0px 5px -5px;
 }
 
 .comment__user > div {
     padding: 2px 5px 2px 5px;
+}
+
+.tea-links {
+    border: 1px solid black;
+}
+
+.tea-links > div {
+    padding: 10px;
+}
+
+.tea-links__header {
+    margin: -10px 0px 10px -10px;
+    background: #505050;
+    color: white;
+    float: left;
+}
+
+.tea-links__header > div {
+    padding: 2px 10px 2px 10px;
+}
+
+.tea-link {
+    margin-top: 10px;
+}
+
+.remove_tea_link {
+    float: right;
 }

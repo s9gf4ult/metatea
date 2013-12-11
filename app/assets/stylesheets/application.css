@@ -59,3 +59,7 @@
 .site_header > div {
     margin-top: 20px;
 }
+
+.control-label {
+    display: block;
+}

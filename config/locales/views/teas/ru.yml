@@ -8,6 +8,9 @@ ru:
   there_is_no_teas: Нет чаев в этой категории
 
   new_tea: Добавить чай
+  edit_tea:
+  save_tea: Сохранить
+  tea_back: Назад
 
   tea_added_by: "Добавил(а): %{user}"
   tea_category_is: "Категория: %{category}"
@@ -29,6 +32,9 @@ ru:
 
   attach_tea_picture: "Прикрепить картинку"
   attach_tea_link: "Прикрепить ссылку"
+
+  tea_links_header: "Ссылки на информацию о чае, или на интернет маганизы"
+  remove_tea_link: Удалить ссылку
 
   confirm_remove_tea: "Удалить этот чай навсегда?"
   send_tea_comment: Комментировать

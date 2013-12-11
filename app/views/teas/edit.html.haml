@@ -1,7 +1,5 @@
-%h1 Editing tea
+%h2= t :edit_tea
 
 = render 'form'
 
-= link_to 'Show', @tea
-\|
-= link_to 'Back', teas_path
+= link_to t(:tea_back), @tea
