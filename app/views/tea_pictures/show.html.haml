@@ -1,6 +1,18 @@
 %p#notice= notice
 
-= link_to @tea_picture.tea.name, @tea_picture.tea if @tea_picture.tea
-.span-18.last
-  = image_tag @tea_picture.picture.url, :class => "tea-picture"
+.show-tea-block.span-8
+  %div
+    - if @tea_picture.tea
+      = link_to @tea_picture.tea do
+        = t :back_to_tea, :tea => @tea_picture.tea.name
+
+- if @tea_picture.user == current_user || @tea_picture.tea.user == current_user
+  .show-tea-block.span-8.last
+    %div
+      = link_to @tea_picture, :method => :delete do
+        = t :remove_tea_picture
+
+.clearfix
+.show-tea-block.span-18.last
+  %div= image_tag @tea_picture.picture.url, :class => "tea-picture"
 .clearfix

@@ -63,3 +63,77 @@
 .control-label {
     display: block;
 }
+
+.button_red {
+    margin: 5px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #FFD4D3;
+    color: black !important;
+    border-radius: 5px;
+}
+
+.button_red > div {
+    padding: 5px 8px 5px 8px;
+}
+
+.button_red:hover {
+    background-color: #FFB1AF;
+}
+
+
+.button_green {
+    margin: 5px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #D4FFCE;
+    color: black !important;
+    border-radius: 5px;
+}
+
+.button_green > div {
+    padding: 5px 8px 5px 8px;
+}
+
+.button_green:hover {
+    background-color: #B6FFAC;
+}
+
+
+.button_blue {
+    margin: 5px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #D1E9FC;
+    color: black !important;
+    border-radius: 5px;
+}
+
+.button_blue > div {
+    padding: 5px 8px 5px 8px;
+}
+
+.button_blue:hover {
+    background-color: #9AD3FF;
+}
+
+.button_yellow {
+    margin: 5px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #FFFEC6;
+    color: black !important;
+    border-radius: 5px;
+}
+
+.button_yellow > div {
+    padding: 5px 8px 5px 8px;
+}
+
+.button_yellow:hover {
+    background-color: #FFFE9A;
+}

@@ -11,11 +11,11 @@
 - if user_signed_in? && @tea.user == current_user
   .span-8
     %div
-      = link_to @tea, :method => :delete, :confirm => t(:confirm_remove_tea) do
-        = t :remove_tea
+      = link_to @tea, :method => :delete, :confirm => t(:confirm_remove_tea), :class => "button_red" do
+        %div= t :remove_tea
     %div
-      = link_to edit_tea_path(@tea) do
-        = t :edit_tea
+      = link_to edit_tea_path(@tea), :class => "button_green" do
+        %div= t :edit_tea
 
 .clearfix
 
@@ -31,8 +31,8 @@
 
 .span-19.last.show-tea-block
   %div
-    = link_to new_tea_picture_path("tea[id]" => @tea.id) do
-      = t :attach_tea_picture
+    = link_to new_tea_picture_path("tea[id]" => @tea.id), :class => "button_green" do
+      %div= t :attach_tea_picture
 
 .clearfix
 
@@ -50,8 +50,8 @@
 
 .span-18.last.show-tea-block
   %div
-    = link_to new_tea_link_path("tea[id]" => @tea.id) do
-      = t :attach_tea_link
+    = link_to new_tea_link_path("tea[id]" => @tea.id), :class => "button_green" do
+      %div= t :attach_tea_link
 
 
 - if user_signed_in?

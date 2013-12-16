@@ -1,23 +1,21 @@
 
-.span-19.last.show-tea-block
+.span-8.show-tea-block
   %div
     - SETTINGS[:user][:lists].each do |list_name|
       %div
         - assignment = current_user.named_tea_assignment(list_name, tea)
         - if assignment
           - if list_name == :tried
-            = link_to assignment, :method => :delete, :confirm => t(:confirm_remove_from_list_tried) do
-              = t "remove_from_list_#{list_name}"
+            = link_to assignment, :method => :delete, :confirm => t(:confirm_remove_from_list_tried), :class => "button_yellow" do
+              %div= t "remove_from_list_#{list_name}"
           - else
-            = link_to assignment, :method => :delete do
-              = t "remove_from_list_#{list_name}"
+            = link_to assignment, :method => :delete, :class => "button_yellow" do
+              %div= t "remove_from_list_#{list_name}"
         - else
-          = link_to tea_list_assignments_path("tea_list_assignment[list_name]" => list_name, "tea_list_assignment[tea_id]" => tea.id), :method => :post do
-            = t "add_to_list_#{list_name}"
+          = link_to tea_list_assignments_path("tea_list_assignment[list_name]" => list_name, "tea_list_assignment[tea_id]" => tea.id), :method => :post, :class => "button_green" do
+            %div= t "add_to_list_#{list_name}"
 
-.clearfix
-
-.span-19.last.show-tea-block
+.span-8.last.show-tea-block
   %div
-    = link_to select_second_tea_path(tea) do
-      = t :compare_tea
+    = link_to select_second_tea_path(tea), :class => "button_blue" do
+      %div= t :compare_tea
