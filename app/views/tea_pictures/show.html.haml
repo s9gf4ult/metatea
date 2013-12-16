@@ -3,14 +3,14 @@
 .show-tea-block.span-8
   %div
     - if @tea_picture.tea
-      = link_to @tea_picture.tea do
-        = t :back_to_tea, :tea => @tea_picture.tea.name
+      = link_to @tea_picture.tea, :class => "button_blue" do
+        %div= t :back_to_tea, :tea => @tea_picture.tea.name
 
 - if @tea_picture.user == current_user || @tea_picture.tea.user == current_user
   .show-tea-block.span-8.last
     %div
-      = link_to @tea_picture, :method => :delete do
-        = t :remove_tea_picture
+      = link_to @tea_picture, :method => :delete, :class => "button_red" do
+        %div= t :remove_tea_picture
 
 .clearfix
 .show-tea-block.span-18.last

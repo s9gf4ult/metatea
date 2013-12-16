@@ -1,4 +1,10 @@
 ru:
+  helpers:
+    submit:
+      tea_picture:
+        create: Загрузить
+      tea_link:
+        create: Добавить ссылку
   simple_form:
     labels:
       tea:
@@ -6,3 +12,9 @@ ru:
         factory: Фабрика
         category: Категория
         collection_date: Дата сбора
+      tea_picture:
+        tea_id: Чай
+        picture: Картинка
+      tea_link:
+        link: Ссылка
+        tea_id: Чай
