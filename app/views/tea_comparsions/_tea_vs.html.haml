@@ -1,1 +1,3 @@
-= image_tag(tea.tea_pictures.first.picture.url(:medium)) if tea.tea_pictures.count > 0
+%div
+  %h2= link_to tea.name, tea
+  %div= image_tag(tea.tea_pictures.first.picture.url(:big)) if tea.tea_pictures.count > 0

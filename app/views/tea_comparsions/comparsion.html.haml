@@ -1,10 +1,15 @@
-.span-8
-  = render :partial => "tea_vs", :locals => {:tea => @first_tea}
+.show-tea-block
+  %div
+    .span-8
+      = render :partial => "tea_vs", :locals => {:tea => @first_tea}
 
-%h1.span-2.large VS
+    %h1.span-1.large VS
 
-.span-8.last
-  = render :partial => "tea_vs", :locals => {:tea => @second_tea}
+    .span-8.last
+      = render :partial => "tea_vs", :locals => {:tea => @second_tea}
+
+    .clearfix
 
 - SETTINGS[:axis][:names].each do |axis_name|
   = render :partial => "axis_vs", :locals => {:axis_name => axis_name}
+  .clearfix

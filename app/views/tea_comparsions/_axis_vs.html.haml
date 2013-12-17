@@ -1,32 +1,52 @@
-.span-20.last
-  %h1= t axis_name
-
-- comparsion = TeaComparsion.where(:user_id => current_user.id, :axis_name => axis_name).with_teas(@first_tea, @second_tea).first
-.span-7
-  - if comparsion && comparsion.right_tea.id == @first_tea.id && comparsion.result != 0
-    %h2 This
-  - else
-    = link_to(create_comparsion_path(axis_name, @first_tea, @first_tea, @second_tea), :method => :post) do
-      %h2 This
-
-.span-6
+.show-tea-block
   %div
-    - if comparsion
-      = link_to tea_comparsion_path(comparsion, :first_tea_id => @first_tea.id), :method => :delete do
-        %h2 Dont know
-    - else
-      %h2 Dont know
+    .centered
+      %h2= t axis_name
+    %hr/
 
-  %div
-    - if comparsion && comparsion.result == 0
-      %h2 They equal
-    - else
-      = link_to(create_comparsion_path(axis_name, @first_tea, @first_tea, @second_tea, 0), :method => :post) do
-        %h2 They equal
+    - comparsion = TeaComparsion.where(:user_id => current_user.id, :axis_name => axis_name).with_teas(@first_tea, @second_tea).first
 
-.span-7.last
-  - if comparsion && comparsion.right_tea.id == @second_tea.id && comparsion.result != 0
-    %h2 This
-  - else
-    = link_to(create_comparsion_path(axis_name, @first_tea, @second_tea, @first_tea), :method => :post) do
-      %h2 This
+    .span-5.prepend-1
+      - if comparsion && comparsion.right_tea.id == @first_tea.id && comparsion.result != 0
+        = link_to tea_comparsion_path(comparsion, :first_tea_id => @first_tea.id), :method => :delete, :class => "button_red" do
+          %div =<<
+      - else
+        = link_to create_comparsion_path(axis_name, @first_tea, @first_tea, @second_tea), :method => :post, :class => "button_yellow" do
+          %div =<<
+
+    .span-6.centered
+      %h3 ==
+
+    .span-5.last
+      .right
+        %h3 >>=
+
+
+-#   .span-7
+-#   - if comparsion && comparsion.right_tea.id == @first_tea.id && comparsion.result != 0
+-#     %h2 This
+-#   - else
+-#     = link_to(create_comparsion_path(axis_name, @first_tea, @first_tea, @second_tea), :method => :post) do
+-#       %h2 This
+
+-# .span-6
+-#   %div
+-#     - if comparsion
+-#       = link_to tea_comparsion_path(comparsion, :first_tea_id => @first_tea.id), :method => :delete do
+-#         %h2 Dont know
+-#     - else
+-#       %h2 Dont know
+
+-#   %div
+-#     - if comparsion && comparsion.result == 0
+-#       %h2 They equal
+-#     - else
+-#       = link_to(create_comparsion_path(axis_name, @first_tea, @first_tea, @second_tea, 0), :method => :post) do
+-#         %h2 They equal
+
+-# .span-7.last
+-#   - if comparsion && comparsion.right_tea.id == @second_tea.id && comparsion.result != 0
+-#     %h2 This
+-#   - else
+-#     = link_to(create_comparsion_path(axis_name, @first_tea, @second_tea, @first_tea), :method => :post) do
+-#       %h2 This

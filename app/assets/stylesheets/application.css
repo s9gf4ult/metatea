@@ -137,3 +137,8 @@
 .button_yellow:hover {
     background-color: #FFFE9A;
 }
+
+
+.centered {
+    text-align: center;
+}
