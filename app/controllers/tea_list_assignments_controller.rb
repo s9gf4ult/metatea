@@ -3,7 +3,11 @@ class TeaListAssignmentsController < ApplicationController
 
   SETTINGS[:user][:lists].each do |lname|
     define_method lname do
+      category = params[:tea][:category] if params[:tea]
       @teas = current_user.teas_in_list(lname)
+      if category
+        @teas = @teas.where(:category => category)
+      end
       respond_to do |format|
         format.html { render "teas_list" }
         format.json { render :json => @teas }

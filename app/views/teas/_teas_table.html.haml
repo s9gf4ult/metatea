@@ -13,7 +13,12 @@
         = link_to tea do
           = image_tag(tea.tea_pictures.first.picture.url(:small)) if tea.tea_pictures.length > 0
       %td
-        = link_to teas_path("tea[category]" => tea.category) do
-          = t tea.category
+        - if controller.controller_name == "teas"
+          = link_to teas_path("tea[category]" => tea.category) do
+            = t tea.category
+        - elsif controller.controller_name == "tea_list_assignments"
+          - action = controller.action_name
+          = link_to send("#{action}_tea_list_assignments_path", "tea[category]" => tea.category) do
+            = t tea.category
       %td= tea.factory
       %td= tea.collection_date

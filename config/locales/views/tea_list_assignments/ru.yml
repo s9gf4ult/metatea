@@ -1,2 +1,3 @@
 ru:
   there_is_no_teas_in_list: Нет чаев в этом списке
+  teas_that_you: "Чаи, которые вы %{action}"

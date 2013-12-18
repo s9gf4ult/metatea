@@ -1,8 +1,16 @@
+%h2= t :select_second_tea
+
 %table
   %tr
-    %th Name
-    %th Picture
+    %th= t :tea_compared
+    %th= t :tea_name
+    %th= t :tea_picture
   - @teas.each do |tea|
     %tr
+      %td
+        - if TeaComparsion.with_teas(@first_tea, tea).first
+          = image_tag "/assets/yes.png"
       %td= link_to tea.name, compare_teas_path(@first_tea, tea)
-      %td= image_tag(tea.tea_pictures.first.picture.url(:small)) if tea.tea_pictures.length > 0
+      %td
+        = link_to compare_teas_path(@first_tea, tea) do
+          = image_tag(tea.tea_pictures.first.picture.url(:small)) if tea.tea_pictures.length > 0

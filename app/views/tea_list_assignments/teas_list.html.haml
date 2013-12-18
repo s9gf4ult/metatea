@@ -1,4 +1,5 @@
 - if @teas.count > 0
+  %h2= t :teas_that_you, :action => t(controller.action_name)
   = render :partial => "teas/teas_table", :locals => {:teas => @teas}
 - else
-  %h1= t :there_is_no_teas_in_list
+  %h2= t :there_is_no_teas_in_list
