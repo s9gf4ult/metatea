@@ -142,3 +142,8 @@
 .centered {
     text-align: center;
 }
+
+.readable-text * {
+    font-size: 1.2em;
+    line-height: 130%;
+}

@@ -1,5 +1,5 @@
 class Tea < ActiveRecord::Base
-  attr_accessible :category, :factory, :name, :user_id, :collection_date
+  attr_accessible :category, :factory, :name, :user_id, :collection_date, :description
   acts_as_commentable
 
   validates :name, :presence => true
