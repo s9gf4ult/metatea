@@ -6,7 +6,11 @@ class TeaComparsionsController < ApplicationController
   # GET
   def select_second
     @first_tea = Tea.find params[:first_tea_id]
-    @teas = current_user.teas_in_list(:tried).where('teas.id <> ?', @first_tea.id)
+    if current_user.can_compare?(@first_tea)
+      @teas = current_user.teas_in_list(:tried).where('teas.id <> ?', @first_tea.id)
+    else
+      redirect_to :root, :note => "you can not compare this tea"
+    end
   end
 
   # GET

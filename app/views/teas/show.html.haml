@@ -6,7 +6,7 @@
   %div= t :tea_category_is, :category => @tea.category
   %div= t :tea_collection_date_is, :date => @tea.collection_date if @tea.collection_date
   %div= t :tea_factory_is, :factory => @tea.factory if @tea.factory
-  %div= t :tea_added_by, :user => @tea.user.email
+  %div= t :tea_added_by, :user => @tea.user.name
 
 - if user_signed_in? && @tea.user == current_user
   .span-8

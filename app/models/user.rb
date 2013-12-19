@@ -23,4 +23,8 @@ class User < ActiveRecord::Base
   def named_tea_assignment(list_name, tea)
     self.tea_list_assignments.where(:list_name => list_name, :tea_id => tea.id).first
   end
+
+  def can_compare?(tea)
+    self.named_tea_assignment("tried", tea) ? true : false
+  end
 end
