@@ -36,6 +36,7 @@ ru:
 
   tea_links_header: "Ссылки на информацию о чае, или на интернет маганизы"
   remove_tea_link: Удалить ссылку
+  realy_delete_tea_link: Удалить ссылку?
 
   confirm_remove_tea: "Удалить этот чай навсегда?"
   send_tea_comment: Комментировать

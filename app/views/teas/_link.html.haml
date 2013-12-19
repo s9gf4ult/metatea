@@ -2,6 +2,6 @@
 
 - if link.user == current_user || link.tea.user == current_user
   .remove_tea_link
-    = link_to link, :method => :delete do
+    = link_to link, :method => :delete, :confirm => t(:realy_delete_tea_link) do
       %div= t :remove_tea_link
 .clearfix

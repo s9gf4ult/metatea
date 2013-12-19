@@ -14,12 +14,17 @@ class TeaLink < ActiveRecord::Base
   private
 
   def validate_url
+    def invalid_link
+      errors.add(:link, "Link is not valid")
+    end
+
     u = URI.parse(self.link)
-    puts u
-    ['http', 'https'].include? u.scheme
+    unless ['http', 'https'].include? u.scheme
+      invalid_link
+    end
   rescue URI::BadURIError
-    errors.add(:link, "Link is not valid")
+    invalid_link
   rescue URI::InvalidURIError
-    errors.add(:link, "Link is not valid")
+    invalid_link
   end
 end

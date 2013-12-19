@@ -3,6 +3,7 @@ ru:
 
   site_info: "Этот сайт"
   hello_user: "Привет, %{user}"
+  edit_user_profile: Профиль
   logout: "Выйти"
   sign_up: "Зарегистрироваться"
   sign_in: "Войти"

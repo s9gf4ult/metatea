@@ -62,6 +62,6 @@
 .clearfix
 
 .span-18.last.show-tea-block
-  %div= render :partial => "comments_list", :locals => {:tea => @tea}
+  %div= render :partial => "comments_list", :locals => {:comments => @tea.comments}
 
 .clearfix

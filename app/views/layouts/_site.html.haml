@@ -6,6 +6,9 @@
     - if user_signed_in?
       %div= t :hello_user, :user => current_user.email
       %div
+        = link_to edit_user_registration_path do
+          = t :edit_user_profile
+      %div
         = link_to destroy_user_session_path, :method => :delete do
           = t :logout
     - else
