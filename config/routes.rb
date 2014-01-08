@@ -31,6 +31,11 @@ Metatea::Application.routes.draw do
     end
   end
 
+  namespace :axis do
+    SETTINGS[:axis][:names].each do |axis_name|
+      get axis_name, :to => axis_name
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

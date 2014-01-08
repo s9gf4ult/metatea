@@ -1,0 +1,9 @@
+.sidebar_block__header
+  %div= t :axis
+
+.sidebar_block__content
+  %div
+    - SETTINGS[:axis][:names].each do |axis_name|
+      %div
+        = link_to(send("axis_#{axis_name}_url")) do
+          = t axis_name

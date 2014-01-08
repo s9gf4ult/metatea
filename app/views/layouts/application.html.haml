@@ -19,6 +19,9 @@
         .sidebar_block
           %div= render :partial => "layouts/categories"
 
+        .sidebar_block
+          %div= render :partial => "layouts/axis"
+
         - if user_signed_in?
           .sidebar_block
             %div= render :partial => "layouts/user_lists"
