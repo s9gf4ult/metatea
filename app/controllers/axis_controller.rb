@@ -40,14 +40,15 @@ class AxisController < ApplicationController
       (m1, m2) = build_maps graph
       tea_groups = []           # [[[id, xpos]]]
       ug.each_connected_component do |component|
+        fst = component[0]
         rest = component[1..component.length-1]
-        (mtx, v) = build_lineq m1, m2, rest
+        (mtx, v) = build_lineq m1, m2, fst, rest
         resv = GSL::Linalg::QR.solve(mtx, v).to_a.unshift(0) # prepend 0 to its place
         res = normalize_array resv
         tea_groups.push component.zip(res)
       end
 
-      @comps = build_maps(graph).to_s
+      @comps = tea_groups.to_s
 
       render :show
     end
@@ -74,12 +75,41 @@ class AxisController < ApplicationController
     return [m1, m2]
   end
 
-  def build_lineq(map1, map2, vertixes)
+  def build_lineq(map1, map2, fst, vertixes)
     size = vertixes.length
+    vmap = Hash.new
+    vertixes.zip(0..size).each do |v, idx|
+      vmap[v] = idx
+    end
+
     m = GSL::Matrix.alloc(size, size)
     v = GSL::Vector.alloc(size).col
-    vertixes.zip(0..size) do |vertex, rown|
-      #  FIXME:
+    vertixes.zip(0..size).each do |vertex, rown|
+      if map1.has_key? vertex                   # as left vertex
+        map1[vertex].each do |(vl, vr, weight)| # vl = vertex
+          if vr == fst                          # snd vertex is 0
+          elsif vmap.has_key? vr
+            m[rown, vmap[vr]] -= 1
+          else
+            raise Exception.new("given vertixes is not connected component")
+          end
+          v[rown] -= weight
+          m[rown, rown] += 1
+        end
+      end
+
+      if map2.has_key? vertex
+        map2[vertex].each do |(vl, vr, weight)| # vr = vertex
+          if vl == fst                          # fst vertex is 0
+          elsif vmap.has_key? vl
+            m[rown, vmap[vl]] -= 1
+          else
+            raise Exception.new("given vertixes is not connected component")
+          end
+          v[rown] += weight
+          m[rown, rown] += 1
+        end
+      end
     end
     return [m, v]
   end
