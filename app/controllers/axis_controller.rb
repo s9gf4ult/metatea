@@ -115,7 +115,18 @@ class AxisController < ApplicationController
   end
 
   def normalize_array(vector)
-    return vector               #  FIXME:
+    bg = -10
+    nd = 10
+    tlen = nd - bg
+    l = vector.min
+    h = vector.max
+    len = h - l
+    if len <= 0
+      return vector
+    end
+    vector.map do |val|
+      ((val-l) / len * tlen) + bg
+    end
   end
 
 
