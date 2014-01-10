@@ -2,4 +2,11 @@
 
 = t @axis_name
 
-= @comps
+%ul
+  - @tea_groups.each do |tg|
+    %li
+      %ul
+        - tg.each do |tid, xval|
+          - if @teas.has_key? tid
+            - tea = @teas[tid]
+            %li #{tea.name} has weight #{xval}

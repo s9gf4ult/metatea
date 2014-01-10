@@ -8,29 +8,7 @@ class AxisController < ApplicationController
   SETTINGS[:axis][:names].each do |axis_name|
     define_method axis_name do
       @axis_name = axis_name
-      pre_graph = {}
-      TeaComparsion.where(:axis_name => @axis_name).each do |comparsion|
-        keys = [comparsion.left_tea_id, comparsion.right_tea_id]
-        if pre_graph.has_key?(keys)
-          (a, b) = comps[keys]
-          comps[keys] = [a + comparsion.result, b + 1]
-        elsif pre_graph.has_key?(keys.reverse)
-          keys = keys.reverse
-          (a, b) = comps[keys]
-          comps[keys] = [a - comparsion.result, b + 1]
-        else
-          pre_graph[keys] = [comparsion.result, 1]
-        end
-      end
-
-      graph = {}
-      pre_graph.each do |(f, s), (res, count)|
-        if res < 0
-          graph[[s, f]] = -res / count
-        else
-          graph[[f, s]] = res / count
-        end
-      end
+      graph = build_graph axis_name
 
       ug = RGL::AdjacencyGraph.new
       graph.keys.each do |(l, r)|
@@ -48,13 +26,44 @@ class AxisController < ApplicationController
         tea_groups.push component.zip(res)
       end
 
-      @comps = tea_groups.to_s
+      tids = tea_groups.flatten(1).map(&:first)
+      teas = Tea.where(:id => tids)
+      @teas = Hash[*teas.map do |tea|
+                     [tea.id, tea]
+                   end.flatten]
+      @tea_groups = tea_groups
 
       render :show
     end
   end
 
   protected
+  def build_graph(axis_name)
+    pre_graph = {}
+    TeaComparsion.where(:axis_name => axis_name).each do |comparsion|
+      keys = [comparsion.left_tea_id, comparsion.right_tea_id]
+      if pre_graph.has_key?(keys)
+        (a, b) = comps[keys]
+        comps[keys] = [a + comparsion.result, b + 1]
+      elsif pre_graph.has_key?(keys.reverse)
+        keys = keys.reverse
+        (a, b) = comps[keys]
+        comps[keys] = [a - comparsion.result, b + 1]
+      else
+        pre_graph[keys] = [comparsion.result, 1]
+      end
+    end
+    graph = {}
+    pre_graph.each do |(f, s), (res, count)|
+      if res < 0
+        graph[[s, f]] = -res / count
+      else
+        graph[[f, s]] = res / count
+      end
+    end
+    return graph
+  end
+
   def build_maps(graph)
     m1 = {}                     # id => [[id, id, weight]]
     m2 = {}
