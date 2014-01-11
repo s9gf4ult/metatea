@@ -4,6 +4,8 @@ Metatea::Application.routes.draw do
 
   devise_for :users
 
+  get '/about', :to => 'pages#about'
+
   resources :tea_comparsions, :only => [:create, :destroy] do
     collection do
       scope "compare" do
