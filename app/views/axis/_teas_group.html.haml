@@ -1,0 +1,7 @@
+- teas.each do |tea|
+  - pic = tea.tea_pictures.first
+  .axis_tea.left
+    %div
+      = link_to tea do
+        %div= image_tag pic.picture.url(:medium) if pic
+        %div= tea.name

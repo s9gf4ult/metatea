@@ -8,7 +8,7 @@
   - @teas.each do |tea|
     %tr
       %td
-        - if TeaComparsion.with_teas(@first_tea, tea).first
+        - if TeaComparsion.with_teas(@first_tea, tea).where(:user_id => current_user.id).first
           = image_tag "/assets/yes.png"
       %td= link_to tea.name, compare_teas_path(@first_tea, tea)
       %td

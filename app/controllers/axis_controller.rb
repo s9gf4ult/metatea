@@ -27,17 +27,33 @@ class AxisController < ApplicationController
       end
 
       tids = tea_groups.flatten(1).map(&:first)
-      teas = Tea.where(:id => tids)
-      @teas = Hash[*teas.map do |tea|
-                     [tea.id, tea]
-                   end.flatten]
-      @tea_groups = tea_groups
+      t = Tea.where(:id => tids).map do |tea|
+        [tea.id, tea]
+      end.flatten()
+      teas = Hash[*t]
+      puts teas
+      @teas = build_teas_grouped 3, tea_groups, teas # {xpos => [tea]}
 
       render :show
     end
   end
 
   protected
+  def build_teas_grouped(round_to, tea_groups, teas)
+    res = {}
+    tea_groups.each do |tg|
+      tg.each do |(tid, xpos)|
+        key = xpos.to_f.round(round_to)
+        if res.has_key? key
+          res[key].push teas[tid] if teas.has_key? tid
+        else
+          res[key] = [teas[tid]] if teas.has_key? tid
+        end
+      end
+    end
+    return res
+  end
+
   def build_graph(axis_name)
     pre_graph = {}
     TeaComparsion.where(:axis_name => axis_name).each do |comparsion|
@@ -124,8 +140,8 @@ class AxisController < ApplicationController
   end
 
   def normalize_array(vector)
-    bg = -10
-    nd = 10
+    bg = 0
+    nd = 1
     tlen = nd - bg
     l = vector.min
     h = vector.max
