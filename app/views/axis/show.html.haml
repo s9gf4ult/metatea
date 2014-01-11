@@ -1,8 +1,5 @@
 %h2= t @axis_name
 
-.span-18.last
-  - @teas.keys.sort.reverse!.each do |xpos|
-    .span-18.last.show-tea-block
-      %div= render :partial => "teas_group", :locals => {:teas => @teas[xpos]}
-    .clearfix
-.clearfix
+= link_to t(:just_what_tried), send("axis_#{@axis_name}_tried_path")
+
+= render :partial => "teas_axis"

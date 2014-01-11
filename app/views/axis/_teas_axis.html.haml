@@ -1,0 +1,10 @@
+.span-18.last
+  - @teas.keys.sort.reverse!.each do |xpos|
+    .comment
+      %div
+        .comment__user
+          %div= t :xpos_is, :xpos => (xpos*100).round
+        .clearfix
+        %div= render :partial => "teas_group", :locals => {:teas => @teas[xpos]}
+        .clearfix
+.clearfix

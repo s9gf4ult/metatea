@@ -7,38 +7,49 @@ class AxisController < ApplicationController
   # GET
   SETTINGS[:axis][:names].each do |axis_name|
     define_method axis_name do
-      @axis_name = axis_name
-      graph = build_graph axis_name
+      comparsions = TeaComparsion.where(:axis_name => axis_name)
+      axis_body axis_name, comparsions, :show
+    end
 
-      ug = RGL::AdjacencyGraph.new
-      graph.keys.each do |(l, r)|
-        ug.add_edge(l, r)
-      end
-
-      (m1, m2) = build_maps graph
-      tea_groups = []           # [[[id, xpos]]]
-      ug.each_connected_component do |component|
-        fst = component[0]
-        rest = component[1..component.length-1]
-        (mtx, v) = build_lineq m1, m2, fst, rest
-        resv = GSL::Linalg::QR.solve(mtx, v).to_a.unshift(0) # prepend 0 to its place
-        res = normalize_array resv
-        tea_groups.push component.zip(res)
-      end
-
-      tids = tea_groups.flatten(1).map(&:first)
-      t = Tea.where(:id => tids).map do |tea|
-        [tea.id, tea]
-      end.flatten()
-      teas = Hash[*t]
-      puts teas
-      @teas = build_teas_grouped 3, tea_groups, teas # {xpos => [tea]}
-
-      render :show
+    define_method "#{axis_name}_tried" do
+      comparsions = TeaComparsion.where(:axis_name => axis_name, :user_id => current_user.id)
+      axis_body axis_name, comparsions, :show_tried
     end
   end
 
   protected
+
+  def axis_body(axis_name, comparsions, what_render)
+    @axis_name = axis_name
+    graph = build_graph comparsions
+
+    ug = RGL::AdjacencyGraph.new
+    graph.keys.each do |(l, r)|
+      ug.add_edge(l, r)
+    end
+
+    (m1, m2) = build_maps graph
+    tea_groups = []           # [[[id, xpos]]]
+    ug.each_connected_component do |component|
+      fst = component[0]
+      rest = component[1..component.length-1]
+      (mtx, v) = build_lineq m1, m2, fst, rest
+      resv = GSL::Linalg::QR.solve(mtx, v).to_a.unshift(0) # prepend 0 to its place
+      res = normalize_array resv
+      tea_groups.push component.zip(res)
+    end
+
+    tids = tea_groups.flatten(1).map(&:first)
+    t = Tea.where(:id => tids).map do |tea|
+      [tea.id, tea]
+    end.flatten()
+    teas = Hash[*t]
+    puts teas
+    @teas = build_teas_grouped 3, tea_groups, teas # {xpos => [tea]}
+
+    render what_render
+  end
+
   def build_teas_grouped(round_to, tea_groups, teas)
     res = {}
     tea_groups.each do |tg|
@@ -54,17 +65,17 @@ class AxisController < ApplicationController
     return res
   end
 
-  def build_graph(axis_name)
+  def build_graph(comparsions)
     pre_graph = {}
-    TeaComparsion.where(:axis_name => axis_name).each do |comparsion|
+    comparsions.each do |comparsion|
       keys = [comparsion.left_tea_id, comparsion.right_tea_id]
       if pre_graph.has_key?(keys)
-        (a, b) = comps[keys]
-        comps[keys] = [a + comparsion.result, b + 1]
+        (a, b) = pre_graph[keys]
+        pre_graph[keys] = [a + comparsion.result, b + 1]
       elsif pre_graph.has_key?(keys.reverse)
         keys = keys.reverse
-        (a, b) = comps[keys]
-        comps[keys] = [a - comparsion.result, b + 1]
+        (a, b) = pre_graph[keys]
+        pre_graph[keys] = [a - comparsion.result, b + 1]
       else
         pre_graph[keys] = [comparsion.result, 1]
       end

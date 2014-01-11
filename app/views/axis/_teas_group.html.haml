@@ -4,4 +4,4 @@
     %div
       = link_to tea do
         %div= image_tag pic.picture.url(:medium) if pic
-        %div= tea.name
+      = link_to tea.name, tea

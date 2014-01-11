@@ -34,6 +34,7 @@ Metatea::Application.routes.draw do
   namespace :axis do
     SETTINGS[:axis][:names].each do |axis_name|
       get axis_name, :to => axis_name
+      get "#{axis_name}_tried".to_sym, :to => "#{axis_name}_tried".to_sym
     end
   end
 

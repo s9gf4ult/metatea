@@ -1,0 +1,5 @@
+%h2 #{t @axis_name} (#{t :just_what_tried})
+
+= link_to t(:all_teas), send("axis_#{@axis_name}_path")
+
+= render :partial => "teas_axis"
