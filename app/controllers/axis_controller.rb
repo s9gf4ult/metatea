@@ -12,6 +12,7 @@ class AxisController < ApplicationController
     end
 
     define_method "#{axis_name}_tried" do
+      authenticate_user!
       comparsions = TeaComparsion.where(:axis_name => axis_name, :user_id => current_user.id)
       axis_body axis_name, comparsions, :show_tried
     end

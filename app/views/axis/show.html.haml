@@ -1,5 +1,6 @@
 %h2= t @axis_name
 
-= link_to t(:just_what_tried), send("axis_#{@axis_name}_tried_path")
+- if user_signed_in?
+  = link_to t(:just_what_tried), send("axis_#{@axis_name}_tried_path")
 
 = render :partial => "teas_axis"
