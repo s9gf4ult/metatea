@@ -22,31 +22,36 @@ class AxisController < ApplicationController
 
   def axis_body(axis_name, comparsions, what_render)
     @axis_name = axis_name
-    graph = build_graph comparsions
+    tcs = TeaComparsion.where(:axis_name => axis_name).count
+    ltc = TeaComparsion.where(:axis_name => axis_name).order(:created_at => :desc).first
+    ltc = ltc.created_at if ltc
+    @teas = Rails.cache.fetch("data:axis:#{axis_name}:tea_groups:#{tcs}:#{ltc}") do # autoexpire
+    # @teas = begin
+      graph = build_graph comparsions
+      ug = RGL::AdjacencyGraph.new
+      graph.keys.each do |(l, r)|
+        ug.add_edge(l, r)
+      end
 
-    ug = RGL::AdjacencyGraph.new
-    graph.keys.each do |(l, r)|
-      ug.add_edge(l, r)
+      (m1, m2) = build_maps graph
+      tea_groups = []           # [[[id, xpos]]]
+      ug.each_connected_component do |component|
+        fst = component[0]
+        rest = component[1..component.length-1]
+        (mtx, v) = build_lineq m1, m2, fst, rest
+        resv = GSL::Linalg::QR.solve(mtx, v).to_a.unshift(0) # prepend 0 to its place
+        res = normalize_array resv
+        tea_groups.push component.zip(res)
+      end
+
+      tids = tea_groups.flatten(1).map(&:first)
+      t = Tea.where(:id => tids).map do |tea|
+        [tea.id, tea]
+      end.flatten()
+      teas = Hash[*t]
+      puts teas
+      build_teas_grouped 3, tea_groups, teas # {xpos => [tea]}
     end
-
-    (m1, m2) = build_maps graph
-    tea_groups = []           # [[[id, xpos]]]
-    ug.each_connected_component do |component|
-      fst = component[0]
-      rest = component[1..component.length-1]
-      (mtx, v) = build_lineq m1, m2, fst, rest
-      resv = GSL::Linalg::QR.solve(mtx, v).to_a.unshift(0) # prepend 0 to its place
-      res = normalize_array resv
-      tea_groups.push component.zip(res)
-    end
-
-    tids = tea_groups.flatten(1).map(&:first)
-    t = Tea.where(:id => tids).map do |tea|
-      [tea.id, tea]
-    end.flatten()
-    teas = Hash[*t]
-    puts teas
-    @teas = build_teas_grouped 3, tea_groups, teas # {xpos => [tea]}
 
     render what_render
   end
@@ -57,13 +62,22 @@ class AxisController < ApplicationController
       tg.each do |(tid, xpos)|
         key = xpos.to_f.round(round_to)
         if res.has_key? key
-          res[key].push teas[tid] if teas.has_key? tid
+          res[key].push mk_tea_hash(teas[tid]) if teas.has_key? tid
         else
-          res[key] = [teas[tid]] if teas.has_key? tid
+          res[key] = [mk_tea_hash(teas[tid])] if teas.has_key? tid
         end
       end
     end
     return res
+  end
+
+  # needed because of caching
+  def mk_tea_hash(tea)
+    pic = tea.tea_pictures.first
+    return({ :id => tea.id,
+             :name => tea.name,
+             :picture => (pic.picture.url(:small) if pic),
+             :path => url_for(tea)})
   end
 
   def build_graph(comparsions)

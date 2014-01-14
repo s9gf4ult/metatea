@@ -1,7 +1,6 @@
 - teas.each do |tea|
-  - pic = tea.tea_pictures.first
   .axis_tea.left
     %div
-      = link_to tea do
-        %div= image_tag pic.picture.url(:medium) if pic
-      = link_to tea.name, tea
+      = link_to tea[:path] do
+        %div= image_tag tea[:picture] if tea[:picture]
+      = link_to tea[:name], tea[:path]
