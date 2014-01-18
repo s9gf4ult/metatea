@@ -26,7 +26,6 @@ class AxisController < ApplicationController
     ltc = TeaComparsion.where(:axis_name => axis_name).order(:created_at => :desc).first
     ltc = ltc.created_at if ltc
     @teas = Rails.cache.fetch("data:axis:#{axis_name}:tea_groups:#{tcs}:#{ltc}") do # autoexpire
-    # @teas = begin
       graph = build_graph comparsions
       ug = RGL::AdjacencyGraph.new
       graph.keys.each do |(l, r)|
@@ -76,7 +75,7 @@ class AxisController < ApplicationController
     pic = tea.tea_pictures.first
     return({ :id => tea.id,
              :name => tea.name,
-             :picture => (pic.picture.url(:small) if pic),
+             :picture => (pic.picture.url(:medium) if pic),
              :path => url_for(tea)})
   end
 
