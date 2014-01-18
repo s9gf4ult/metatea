@@ -2,7 +2,7 @@ class AxisController < ApplicationController
   require 'rgl/base'
   require 'rgl/adjacency'
   require 'rgl/connected_components'
-  require 'gsl'
+  require 'narray'
 
   # GET
   SETTINGS[:axis][:names].each do |axis_name|
@@ -38,7 +38,7 @@ class AxisController < ApplicationController
         fst = component[0]
         rest = component[1..component.length-1]
         (mtx, v) = build_lineq m1, m2, fst, rest
-        resv = GSL::Linalg::QR.solve(mtx, v).to_a.unshift(0) # prepend 0 to its place
+        resv = mtx.lu.solve(v).to_a.unshift(0) # prepend 0 to its place
         res = normalize_array resv
         tea_groups.push component.zip(res)
       end
@@ -132,8 +132,8 @@ class AxisController < ApplicationController
       vmap[v] = idx
     end
 
-    m = GSL::Matrix.alloc(size, size)
-    v = GSL::Vector.alloc(size).col
+    m = NMatrix.new NMatrix::DFLOAT, size, size
+    v = NVector.new NVector::DFLOAT, size
     vertixes.zip(0..size).each do |vertex, rown|
       if map1.has_key? vertex                   # as left vertex
         map1[vertex].each do |(vl, vr, weight)| # vl = vertex
