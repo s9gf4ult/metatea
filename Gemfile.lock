@@ -69,8 +69,6 @@ GEM
     faker (1.2.0)
       i18n (~> 0.5)
     ffi (1.9.0)
-    gsl (1.15.3)
-      narray (>= 0.5.9)
     guard (1.4.0)
       listen (>= 0.4.2)
       thor (>= 0.14.6)
@@ -207,10 +205,10 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
-  gsl
   guard-rspec
   haml-rails
   jquery-rails
+  narray
   paperclip
   rails (= 3.2.13)
   rgl

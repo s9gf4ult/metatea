@@ -12,7 +12,7 @@ gem 'paperclip'
 gem 'devise'
 gem 'acts_as_commentable', '3.0.1'
 gem 'russian', '~> 0.6.0'
-gem 'gsl'
+gem 'narray'
 gem 'rgl'
 gem 'thin'
 
