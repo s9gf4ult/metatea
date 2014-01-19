@@ -23,7 +23,7 @@ class AxisController < ApplicationController
   def axis_body(axis_name, comparsions, what_render)
     @axis_name = axis_name
     tcs = TeaComparsion.where(:axis_name => axis_name).count
-    ltc = TeaComparsion.where(:axis_name => axis_name).order(:created_at => :desc).first
+    ltc = TeaComparsion.where(:axis_name => axis_name).order("created_at DESC").first
     ltc = ltc.created_at if ltc
     @teas = Rails.cache.fetch("data:axis:#{axis_name}:tea_groups:#{tcs}:#{ltc}") do # autoexpire
       graph = build_graph comparsions

@@ -9,5 +9,8 @@ FactoryGirl.define do
       Faker::Internet.password
     end
     remember_me false
+    name do
+      Faker::Name.first_name
+    end
   end
 end
